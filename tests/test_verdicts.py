@@ -132,7 +132,7 @@ def test_float_rows_check_and_verdict():
     assert rows[0]["relative Abweichung"] < 1e-12 and 1e-11 < rows[1]["relative Abweichung"] < 1e-9 and rows[-1]["relative Abweichung"] > 1e4
     assert [r["relative Abweichung"] for r in rows] == sorted(r["relative Abweichung"] for r in rows)
     kind, text = ev.verdict_float(rows, [])
-    assert kind == "warning" and "1,5·10⁻¹⁰ bei k = 15, 8,8·10⁻⁵ bei k = 25 und 2,8·10⁴ bei k = 40 (größter Summand 1,2·10⁶⁴)" in text
+    assert kind == "warning" and "1,5·10⁻¹⁰ bei k = 15, 8,8·10⁻⁵ bei k = 25 und 2,8·10⁴ bei k = 40 (letzter Summand k^k 1,2·10⁶⁴, der größte Summand ist noch größer)" in text
     assert ev.verdict_float(rows, ["x"])[0] == "error" and ev.float_check([dict(rows[0], **{"exakt (k!)": 5})])
 
 

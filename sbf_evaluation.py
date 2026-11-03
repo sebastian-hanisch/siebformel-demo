@@ -211,7 +211,7 @@ def terms_rows() -> list[dict]:
 def verdict_terms(rows: list[dict]):
     r = rows[3]
     return "success", (f"{r['Brett']} (n = {r['n']}): {big_text(r['Teilmengen 2^|F|'])} Teilmengen verbotener Felder, davon nur {big_text(r['nichtangreifend'])} nichtangreifend und {r['Turmzahlen ungleich 0']} Turmzahlen ungleich 0: "
-                       "die Struktur des Bretts (Zeilen und Spalten) kürzt das Sieb auf wenige Summanden.")
+                       "nach der Zahl der Türme zusammengefasst bleiben höchstens n + 1 Summanden (die Turmzahlen selbst muss man ausrechnen).")
 
 
 def menage_rows() -> list[dict]:
@@ -324,7 +324,7 @@ def float_rows() -> list[dict]:
     for k in C.FLOAT_KS:
         exact = A.surjections_sieve(k, k)
         fl = A.surjections_sieve_float(k, k)
-        rows.append({"k = n": k, "exakt (k!)": exact, "Gleitkomma": fl, "relative Abweichung": abs(fl - float(exact)) / float(exact), "größter Summand": float(k) ** k})
+        rows.append({"k = n": k, "exakt (k!)": exact, "Gleitkomma": fl, "relative Abweichung": abs(fl - float(exact)) / float(exact), "letzter Summand k^k": float(k) ** k})
     return rows
 
 
@@ -337,7 +337,7 @@ def verdict_float(rows: list[dict], problems: list[str]):
         return "error", "Das exakte Sieb weicht von k! ab: " + "; ".join(problems)
     last = rows[-1]
     return "warning", (f"Surjektionen von k auf k (Ergebnis k!) über das Sieb: in Gleitkomma ist die relative Abweichung {sci_text(rows[1]['relative Abweichung'])} bei k = {rows[1]['k = n']}, "
-                       f"{sci_text(rows[3]['relative Abweichung'])} bei k = {rows[3]['k = n']} und {sci_text(last['relative Abweichung'])} bei k = {last['k = n']} (größter Summand {sci_text(last['größter Summand'])}): "
+                       f"{sci_text(rows[3]['relative Abweichung'])} bei k = {rows[3]['k = n']} und {sci_text(last['relative Abweichung'])} bei k = {last['k = n']} (letzter Summand k^k {sci_text(last['letzter Summand k^k'])}, der größte Summand ist noch größer): "
                        "die Summanden löschen sich fast aus, dabei geht jede Stelle verloren. Mit ganzen Zahlen stimmt es immer.")
 
 

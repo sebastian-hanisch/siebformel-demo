@@ -2,7 +2,7 @@
 Sebastian Hanisch - Operations Research und Machine Learning
 
 Stück 7 der Reihe „Abzählen und erzeugende Funktionen“: Die Siebformel (Inklusion–Exklusion) für Zuordnungen mit verbotenen Feldern (Turmzahlen, Ménage-Zahlen, Ryser), Hamiltonkreise über Spaziergänge
-und TSP mit Polynomgewichten; gegen Held–Karp (Stück 4) und Aufzählen geprüft; das Sieb spart Speicher, nicht Zeit, und braucht ganze Zahlen.
+und TSP mit Polynomgewichten; gegen Held–Karp (Stück 4) und Aufzählen geprüft; das Sieb spart Speicher, nicht Zeit, und sollte mit ganzen Zahlen gerechnet werden.
 Aufbau und Regeln: DEMO-PLAYBOOK.md (§2).
 
 Lauffähig mit: streamlit run app.py
@@ -112,8 +112,8 @@ st.markdown(
     """
 **Der umgekehrte Weg.** Stück 3 bis 6 haben Strukturen **aufgebaut**. Bei **Verboten** ist es oft einfacher, erst **alles** zu zählen und dann das Verbotene abzuziehen: Die Zahl der Objekte ohne eine von $k$ Eigenschaften ist
 $\\sum_{S} (-1)^{|S|}\\, N(S)$ über alle Teilmengen $S$ der Eigenschaften, mit $N(S)$ = Zahl der Objekte, die mindestens die Eigenschaften in $S$ haben (**Inklusion–Exklusion**).
-Die Summanden wachsen mit $2^k$; die Struktur kürzt sie: bei Zuordnungen mit verbotenen Feldern auf wenige **Turmzahlen**, bei Hamiltonkreisen auf Spaziergänge in Teilmengen der Städte.
-Das Sieb braucht **ganze Zahlen**: die Summanden sind riesig und löschen sich fast aus.
+Die Summanden wachsen mit $2^k$; die Struktur lässt sie zusammenfassen: bei Zuordnungen mit verbotenen Feldern nach der Zahl der Türme auf höchstens $n+1$ Summanden (die **Turmzahlen** selbst muss man ausrechnen), bei Hamiltonkreisen auf Spaziergänge in Teilmengen der Städte.
+Das Sieb sollte mit **ganzen Zahlen** gerechnet werden: die Summanden können riesig sein und löschen sich dann fast aus.
 
 Weiter unten: **fünf Experimente** (**🔬**), eine **🎲 Spielwiese**, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
 """
@@ -253,10 +253,10 @@ verdict(verdict_tsp(tsp))
 st.markdown("---")
 
 st.subheader("🔬 Experiment 5: Exakt rechnen")
-st.caption("Surjektionen von k auf k Maschinen (Ergebnis k!) über das Sieb Σ(−1)^(k−j)·C(k,j)·j^k, einmal mit ganzen Zahlen und einmal in Gleitkomma. Die größten Summanden sind viel größer als das Ergebnis und löschen sich fast aus.")
+st.caption("Surjektionen von k auf k Maschinen (Ergebnis k!) über das Sieb Σ(−1)^(k−j)·C(k,j)·j^k, einmal mit ganzen Zahlen und einmal in Gleitkomma. Schon der letzte Summand k^k ist viel größer als das Ergebnis, und die Summanden löschen sich fast aus.")
 flt, flt_problems = _float()
 st.plotly_chart(build_float(flt), width="stretch", key="float_chart")
-st.dataframe([{"k = n": r["k = n"], "exakt (k!)": big_text(r["exakt (k!)"]), "Gleitkomma": sci_text(r["Gleitkomma"]), "relative Abweichung": sci_text(r["relative Abweichung"]), "größter Summand": sci_text(r["größter Summand"])} for r in flt],
+st.dataframe([{"k = n": r["k = n"], "exakt (k!)": big_text(r["exakt (k!)"]), "Gleitkomma": sci_text(r["Gleitkomma"]), "relative Abweichung": sci_text(r["relative Abweichung"]), "letzter Summand k^k": sci_text(r["letzter Summand k^k"])} for r in flt],
              hide_index=True, width="stretch")
 verdict(verdict_float(flt, flt_problems))
 

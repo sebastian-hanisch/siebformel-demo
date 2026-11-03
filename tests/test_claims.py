@@ -78,7 +78,7 @@ def test_readme_float_table():
     rows = ev.float_rows()
     assert [round(r["relative Abweichung"] / 10 ** math.floor(math.log10(r["relative Abweichung"])), 1) if r["relative Abweichung"] else 0 for r in rows] == [0, 1.5, 2.1, 8.8, 3.2, 2.8]
     assert [math.floor(math.log10(r["relative Abweichung"])) if r["relative Abweichung"] else None for r in rows] == [None, -10, -7, -5, -2, 4]
-    assert f"{rows[-1]['größter Summand']:.1e}" == "1.2e+64" and f"{rows[1]['größter Summand']:.2e}" == "4.38e+17"
+    assert f"{rows[-1]['letzter Summand k^k']:.1e}" == "1.2e+64" and f"{rows[1]['letzter Summand k^k']:.2e}" == "4.38e+17"
     assert all(r["exakt (k!)"] == math.factorial(r["k = n"]) for r in rows)
 
 
