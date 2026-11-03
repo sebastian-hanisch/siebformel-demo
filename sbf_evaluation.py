@@ -324,7 +324,8 @@ def float_rows() -> list[dict]:
     for k in C.FLOAT_KS:
         exact = A.surjections_sieve(k, k)
         fl = A.surjections_sieve_float(k, k)
-        rows.append({"k = n": k, "exakt (k!)": exact, "Gleitkomma": fl, "relative Abweichung": abs(fl - float(exact)) / float(exact), "letzter Summand k^k": float(k) ** k})
+        biggest = max(math.comb(k, j) * j ** k for j in range(k + 1))  # Betrag der Summanden des Siebs, mit ganzen Zahlen gerechnet
+        rows.append({"k = n": k, "exakt (k!)": exact, "Gleitkomma": fl, "relative Abweichung": abs(fl - float(exact)) / float(exact), "größter Summand": float(biggest)})
     return rows
 
 
@@ -337,7 +338,7 @@ def verdict_float(rows: list[dict], problems: list[str]):
         return "error", "Das exakte Sieb weicht von k! ab: " + "; ".join(problems)
     last = rows[-1]
     return "warning", (f"Surjektionen von k auf k (Ergebnis k!) über das Sieb: in Gleitkomma ist die relative Abweichung {sci_text(rows[1]['relative Abweichung'])} bei k = {rows[1]['k = n']}, "
-                       f"{sci_text(rows[3]['relative Abweichung'])} bei k = {rows[3]['k = n']} und {sci_text(last['relative Abweichung'])} bei k = {last['k = n']} (letzter Summand k^k {sci_text(last['letzter Summand k^k'])}, der größte Summand ist noch größer): "
+                       f"{sci_text(rows[3]['relative Abweichung'])} bei k = {rows[3]['k = n']} und {sci_text(last['relative Abweichung'])} bei k = {last['k = n']} (größter Summand {sci_text(last['größter Summand'])}): "
                        "die Summanden löschen sich fast aus, dabei geht jede Stelle verloren. Mit ganzen Zahlen stimmt es immer.")
 
 

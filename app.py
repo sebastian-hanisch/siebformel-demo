@@ -253,10 +253,10 @@ verdict(verdict_tsp(tsp))
 st.markdown("---")
 
 st.subheader("🔬 Experiment 5: Exakt rechnen")
-st.caption("Surjektionen von k auf k Maschinen (Ergebnis k!) über das Sieb Σ(−1)^(k−j)·C(k,j)·j^k, einmal mit ganzen Zahlen und einmal in Gleitkomma. Schon der letzte Summand k^k ist viel größer als das Ergebnis, und die Summanden löschen sich fast aus.")
+st.caption("Surjektionen von k auf k Maschinen (Ergebnis k!) über das Sieb Σ(−1)^(k−j)·C(k,j)·j^k, einmal mit ganzen Zahlen und einmal in Gleitkomma. Schon der größte Summand ist viel größer als das Ergebnis, und die Summanden löschen sich fast aus.")
 flt, flt_problems = _float()
 st.plotly_chart(build_float(flt), width="stretch", key="float_chart")
-st.dataframe([{"k = n": r["k = n"], "exakt (k!)": big_text(r["exakt (k!)"]), "Gleitkomma": sci_text(r["Gleitkomma"]), "relative Abweichung": sci_text(r["relative Abweichung"]), "letzter Summand k^k": sci_text(r["letzter Summand k^k"])} for r in flt],
+st.dataframe([{"k = n": r["k = n"], "exakt (k!)": big_text(r["exakt (k!)"]), "Gleitkomma": sci_text(r["Gleitkomma"]), "relative Abweichung": sci_text(r["relative Abweichung"]), "größter Summand": sci_text(r["größter Summand"])} for r in flt],
              hide_index=True, width="stretch")
 verdict(verdict_float(flt, flt_problems))
 

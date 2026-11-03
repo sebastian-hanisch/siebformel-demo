@@ -78,7 +78,13 @@ def test_readme_float_table():
     rows = ev.float_rows()
     assert [round(r["relative Abweichung"] / 10 ** math.floor(math.log10(r["relative Abweichung"])), 1) if r["relative Abweichung"] else 0 for r in rows] == [0, 1.5, 2.1, 8.8, 3.2, 2.8]
     assert [math.floor(math.log10(r["relative Abweichung"])) if r["relative Abweichung"] else None for r in rows] == [None, -10, -7, -5, -2, 4]
-    assert f"{rows[-1]['letzter Summand k^k']:.1e}" == "1.2e+64" and f"{rows[1]['letzter Summand k^k']:.2e}" == "4.38e+17"
+    assert f"{rows[-1]['größter Summand']:.1e}" == "1.2e+68" and f"{rows[0]['größter Summand']:.1e}" == "4.8e+10"
+    # unabhängig mit Python-Ganzzahlen: Maximum der Beträge |(-1)^(k-j) C(k,j) j^k| über alle Summanden, nicht der letzte (k^k)
+    for r in rows:
+        k = r["k = n"]
+        terms = [math.comb(k, j) * j ** k for j in range(k + 1)]
+        assert r["größter Summand"] == float(max(terms)) and r["größter Summand"] > float(terms[-1]) == float(k) ** k
+        assert terms.index(max(terms)) < k
     assert all(r["exakt (k!)"] == math.factorial(r["k = n"]) for r in rows)
 
 
