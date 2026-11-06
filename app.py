@@ -119,6 +119,19 @@ Weiter unten: **fünf Experimente** (**🔬**), eine **🎲 Spielwiese**, **🚧
 """
 )
 
+# erklaerseite:einfach:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/siebformel-erklaert.json, nicht von Hand ändern)
+with st.expander("💬 In einfachen Worten"):
+    st.markdown(
+        """
+Gezählt wird, wie viele Anordnungen **kein verbotenes Paar** enthalten, etwa Aufgaben auf Maschinen, die manche Aufgaben nicht können. Statt die erlaubten Anordnungen aufzubauen, zählt man **erst alle** und zieht dann das Verbotene ab. Dabei zieht man zu viel ab, weil Anordnungen mit mehreren Verboten mehrfach getroffen werden. Das Zuviel gibt man zurück, und so wechseln Abziehen und Zurückgeben, bis jede Anordnung genau einmal gezählt ist (die **Siebformel**).
+
+Die Zahl der Posten verdoppelt sich mit jedem Verbot, aber die Struktur lässt sie zusammenfassen. Bei Rundreisen spart das Sieb Speicher, nicht Rechenschritte, und es sollte mit **ganzen Zahlen** gerechnet werden. Alles ist simuliert, nichts stammt aus echten Daten.
+
+[Ausführlich und verständlich erklärt, mit Fachteil](https://sebastianhanisch.net/siebformel-erklaert.html)
+        """
+    )
+# erklaerseite:einfach:end
+
 with st.expander("So funktioniert die Siebformel", expanded=True):
     st.markdown(
         """
@@ -299,6 +312,23 @@ st.markdown(
 st.markdown("---")
 
 with st.expander("📐 Mathematische Formulierung"):
+    # erklaerseite:lesehilfe:start (erzeugt von tools/set_demo_explainer.py (Website-Repo) aus tools/content/explainers/siebformel-erklaert.json, nicht von Hand ändern)
+    st.markdown(
+        r"""
+**Lesehilfe.** Gegeben sind eine Menge von Objekten und verbotene Eigenschaften $A_1, \dots, A_k$. Gesucht ist die Zahl der Objekte, die keine dieser Eigenschaften haben.
+
+| Symbol | Bedeutung |
+|---|---|
+| $N(S)$ | Zahl der Objekte, die mindestens die Eigenschaften der Menge $S$ haben |
+| $n$ | Zahl der Aufgaben und Maschinen bzw. der Städte |
+| $r_k$ | Turmzahl: Zahl der Mengen aus $k$ verbotenen Feldern, die in verschiedenen Zeilen und Spalten liegen |
+| $W(S)$ | Zahl der geschlossenen Spaziergänge der Länge $n$ von Stadt $0$, die nur Städte aus $S$ und die Stadt $0$ benutzen |
+| $h_w$ | Zahl der Hamiltonkreise mit Gesamtkosten $w$ |
+
+[Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/siebformel-erklaert.html#fachleute)
+        """
+    )
+    # erklaerseite:lesehilfe:end
     st.markdown(
         r"""
 **Siebformel.** Seien $A_1, \dots, A_k$ Eigenschaften von Objekten einer Menge $U$ und $N(S)$ die Zahl der Objekte mit allen Eigenschaften $A_i$, $i \in S$. Die Zahl der Objekte ohne jede Eigenschaft ist
