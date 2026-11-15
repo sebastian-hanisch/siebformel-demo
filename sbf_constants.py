@@ -35,7 +35,7 @@ COLOR_LINE = "#4c78a8"
 
 PRESETS = {
     "Standardfall: Zufallsbrett 8 × 8": {"task": "Zuordnung", "board": "Zufallsbrett", "n": 8, "share": 20, "r": 3, "seed": 35},
-    "Derangements: Hauptdiagonale 10 × 10": {"task": "Zuordnung", "board": "Hauptdiagonale", "n": 10, "share": 20, "r": 3, "seed": 35},
+    "Fixpunktfreie Permutationen: Hauptdiagonale 10 × 10": {"task": "Zuordnung", "board": "Hauptdiagonale", "n": 10, "share": 20, "r": 3, "seed": 35},
     "Ménage-Zahlen: 9 Paare": {"task": "Zuordnung", "board": "Ménage-Brett", "n": 9, "share": 20, "r": 3, "seed": 35},
     "Leeres Brett: alle 7! Zuordnungen": {"task": "Zuordnung", "board": "Leeres Brett", "n": 7, "share": 20, "r": 3, "seed": 35},
     "Volles Brett: keine Zuordnung": {"task": "Zuordnung", "board": "Volles Brett", "n": 6, "share": 20, "r": 3, "seed": 35},
@@ -44,7 +44,7 @@ PRESETS = {
 }
 PRESET_HELP = {
     "Standardfall: Zufallsbrett 8 × 8": "Acht Aufgaben auf acht Maschinen, jedes fünfte Paar verboten (zufällig): das Sieb über Feldmengen hätte 16.384 Summanden, die Turmzahlen nur 5.",
-    "Derangements: Hauptdiagonale 10 × 10": "Jede Aufgabe darf nicht auf die Maschine mit gleicher Nummer: 1.334.961 Zuordnungen, das Sieb hat 11 Summanden statt 1.024 Teilmengen.",
+    "Fixpunktfreie Permutationen: Hauptdiagonale 10 × 10": "Jede Aufgabe darf nicht auf die Maschine mit gleicher Nummer: 1.334.961 Zuordnungen, das Sieb hat 11 Summanden statt 1.024 Teilmengen.",
     "Ménage-Zahlen: 9 Paare": "Zuordnung i darf weder auf Platz i noch auf Platz i+1 (zyklisch): die Ménage-Zahl 43.387 für neun Paare.",
     "Leeres Brett: alle 7! Zuordnungen": "Kein Feld verboten: 5.040 Zuordnungen, das Sieb hat nur den Summanden 7!.",
     "Volles Brett: keine Zuordnung": "Alle Felder verboten: 0 Zuordnungen, das Sieb löscht sich vollständig aus.",

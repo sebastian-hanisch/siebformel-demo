@@ -152,7 +152,7 @@ with st.sidebar:
     st.header("⚙️ Einstellungen")
     st.markdown("**Aufgabe**")
     task = st.selectbox("Aufgabe", list(C.TASKS), key="task_select", help="Zuordnung: Aufgaben auf Maschinen mit verbotenen Paaren. Rundreise: Hamiltonkreise und kleinste Kosten in einem gerichteten Graphen (Start in Stadt 0).")
-    board = st.selectbox("Brett (nur Zuordnung)", list(C.BOARDS), key="board_select", help="Welche Paare verboten sind: zufällig, die Hauptdiagonale (Derangements), Diagonale plus Nebendiagonale (Ménage), keines oder alle.")
+    board = st.selectbox("Brett (nur Zuordnung)", list(C.BOARDS), key="board_select", help="Welche Paare verboten sind: zufällig, die Hauptdiagonale (fixpunktfreie Permutationen, Derangements), Diagonale plus Nebendiagonale (Ménage), keines oder alle.")
     n = st.slider("Größe n", *bounds("n_slider"), key="n_slider", help=f"Aufgaben und Maschinen beziehungsweise Städte (die Rundreise hat höchstens {C.TOUR_N_MAX}).")
     share = st.slider("Anteil in %", *bounds("share_slider"), key="share_slider", help="Zufallsbrett: Anteil verbotener Felder. Rundreise: Anteil vorhandener Kanten.")
     r = st.slider("Kostenbereich r (Rundreise)", *bounds("r_slider"), key="r_slider", help=f"Kosten liegen zwischen 1 und r (höchstens {C.R_MAX}; das Kostenpolynom hat Grad n·r).")

@@ -54,7 +54,7 @@ def test_time_measurement_runs_on_click():
     assert not at.exception and any("Gemessen auf diesem Rechner (Python)" in i.value for i in at.info)
 
 
-@pytest.mark.parametrize("name,expected", [("Derangements: Hauptdiagonale 10 × 10", "1.334.961"), ("Ménage-Zahlen: 9 Paare", "43.387"), ("Leeres Brett: alle 7! Zuordnungen", "5.040"), ("Volles Brett: keine Zuordnung", "0")])
+@pytest.mark.parametrize("name,expected", [("Fixpunktfreie Permutationen: Hauptdiagonale 10 × 10", "1.334.961"), ("Ménage-Zahlen: 9 Paare", "43.387"), ("Leeres Brett: alle 7! Zuordnungen", "5.040"), ("Volles Brett: keine Zuordnung", "0")])
 def test_board_presets_show_their_number(name, expected):
     at = _app()
     at.sidebar.button(key=f"preset_{name}").click().run(timeout=TIMEOUT)

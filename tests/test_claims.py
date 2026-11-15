@@ -48,7 +48,7 @@ def test_readme_standard_instance():
 
 def test_readme_presets():
     s = ev.Settings
-    expected = {"Standardfall: Zufallsbrett 8 × 8": 3000, "Derangements: Hauptdiagonale 10 × 10": 1334961, "Ménage-Zahlen: 9 Paare": 43387, "Leeres Brett: alle 7! Zuordnungen": 5040, "Volles Brett: keine Zuordnung": 0}
+    expected = {"Standardfall: Zufallsbrett 8 × 8": 3000, "Fixpunktfreie Permutationen: Hauptdiagonale 10 × 10": 1334961, "Ménage-Zahlen: 9 Paare": 43387, "Leeres Brett: alle 7! Zuordnungen": 5040, "Volles Brett: keine Zuordnung": 0}
     for name, value in expected.items():
         assert ev.analyse(s(**C.PRESETS[name])).info["value"] == value, name
     menage = ev.analyse(s(**C.PRESETS["Ménage-Zahlen: 9 Paare"])).info

@@ -1,6 +1,6 @@
 """Orakel-Tests: das Sieb gegen unabhängige Rechenwege (DEMO-PLAYBOOK §12, ORACLE-PLAYBOOK §5).
 
-Unabhängig heißt: Aufzählen aller Permutationen und Rundreisen, die Teilmengen-DP (Permanente, Held–Karp mit Paar-Semiring), die Formeln für Derangements, Surjektionen und Turmzahlen des Kreisbretts,
+Unabhängig heißt: Aufzählen aller Permutationen und Rundreisen, die Teilmengen-DP (Permanente, Held–Karp mit Paar-Semiring), die Formeln für fixpunktfreie Permutationen, Surjektionen und Turmzahlen des Kreisbretts,
 das Aufzählen der Zahlen mit Teilern und die Koeffizientenlisten für die gepackten Polynome. Feste Zufallsstände."""
 
 import itertools

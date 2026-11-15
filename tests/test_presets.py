@@ -34,7 +34,7 @@ def test_setting_specs_cover_every_preset_key():
 
 def test_presets_show_what_their_help_says():
     stats = {name: ev.analyse(ev.Settings(**p)) for name, p in C.PRESETS.items()}
-    assert stats["Derangements: Hauptdiagonale 10 × 10"].info["nonzero"] == 11 and stats["Derangements: Hauptdiagonale 10 × 10"].info["subsets"] == 1024
+    assert stats["Fixpunktfreie Permutationen: Hauptdiagonale 10 × 10"].info["nonzero"] == 11 and stats["Fixpunktfreie Permutationen: Hauptdiagonale 10 × 10"].info["subsets"] == 1024
     assert stats["Leeres Brett: alle 7! Zuordnungen"].info["nonzero"] == 1 and stats["Volles Brett: keine Zuordnung"].info["value"] == 0
     assert stats["Rundreise: alle Kanten, 8 Städte"].info["cycles"] == 5040 and stats["Rundreise: alle Kanten, 8 Städte"].info["subsets"] == 128
     assert stats["Rundreise: Kanten fehlen, Kosten bis 5"].info["cycles"] < 5040

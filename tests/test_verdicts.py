@@ -26,7 +26,7 @@ def test_verdict_answers_for_the_standard_board():
     a = ev.analyse(S())
     kind, text = ev.verdict_answers(a)
     assert kind == "success" and text == ("8 Aufgaben auf 8 Maschinen, 14 verbotene Paare: 3.000 Zuordnungen. Das Sieb über alle Teilmengen verbotener Paare hätte 16.384 Summanden, davon sind 212 nichtangreifend; "
-                                          "mit den Turmzahlen bleiben 5. 5 Rechenweg(e) geben je Frage dieselbe Zahl.")
+                                          "mit den Turmzahlen bleiben 5. 5 Rechenwege geben je Frage dieselbe Zahl.")
 
 
 def test_verdict_answers_for_named_boards():
@@ -39,7 +39,7 @@ def test_verdict_answers_for_named_boards():
 
 def test_verdict_answers_for_tours():
     assert ev.verdict_answers(ev.analyse(S("Rundreise", "Zufallsbrett", 8, 100, 3, 35))) == (
-        "success", "8 Städte (gerichtet, ab Stadt 0): 5.040 Hamiltonkreise, die kleinsten Kosten sind 10, 8 Mal. Das Sieb braucht 128 Teilmengen und 8 gespeicherte Zahlen, Held–Karp 449 Zustände. 6 Rechenweg(e) geben je Frage dieselbe Zahl.")
+        "success", "8 Städte (gerichtet, ab Stadt 0): 5.040 Hamiltonkreise, die kleinsten Kosten sind 10, 8 Mal. Das Sieb braucht 128 Teilmengen und 8 gespeicherte Zahlen, Held–Karp 449 Zustände. 6 Rechenwege geben je Frage dieselbe Zahl.")
     assert ev.verdict_answers(ev.analyse(S("Rundreise", "Zufallsbrett", 8, 60, 5, 35)))[1].startswith("8 Städte (gerichtet, ab Stadt 0): 30 Hamiltonkreise, die kleinsten Kosten sind 18, 1 Mal.")
     assert "es gibt keinen Hamiltonkreis, also auch keine Kosten" in ev.verdict_answers(ev.analyse(S("Rundreise", "Zufallsbrett", 6, 0, 3, 1)))[1]
 

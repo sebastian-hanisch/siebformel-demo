@@ -188,7 +188,7 @@ def verdict_answers(a: Analysis):
         cost_part = "es gibt keinen Hamiltonkreis, also auch keine Kosten" if best[1] == 0 else f"die kleinsten Kosten sind {best[0]}, {big_text(best[1])} Mal"
         head = (f"{a.n_eff} Städte (gerichtet, ab Stadt 0): {big_text(info['cycles'])} Hamiltonkreise, {cost_part}. "
                 f"Das Sieb braucht {big_text(info['subsets'])} Teilmengen und {a.n_eff} gespeicherte Zahlen, Held–Karp {big_text(info['hk_states'])} Zustände.")
-    return "success", f"{head} {len(checked)} Rechenweg(e) geben je Frage dieselbe Zahl."
+    return "success", f"{head} {len(checked)} {'Rechenweg gibt' if len(checked) == 1 else 'Rechenwege geben'} je Frage dieselbe Zahl."
 
 
 # ----------------------------------------------------------------------------- Experiment 2: Terme schrumpfen
