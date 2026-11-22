@@ -124,7 +124,7 @@ def analyse(s: Settings) -> Analysis:
         cost = make_cost(n, s.share, s.r, s.seed)
         adj = A.adjacency_of(cost)
         cycles, ops = A.ham_sieve(n, adj)
-        add("Hamiltonkreise", "Sieb über Spaziergänge", cycles, big_text(cycles), ops)
+        add("Hamiltonkreise", "Sieb über Kantenzüge", cycles, big_text(cycles), ops)
         c2, states, transitions = A.ham_dp(n, adj)
         add("Hamiltonkreise", "Held–Karp-Zähler", c2, big_text(c2), transitions)
         if n <= C.ENUM_TOUR_N:

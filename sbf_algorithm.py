@@ -1,5 +1,5 @@
 """Rechenkern: die Siebformel (Inklusion–Exklusion) mit ganzen Zahlen. Zuordnungen mit verbotenen Feldern (Sieb über Feldmengen, Turmzahlen, Ryser, Teilmengen-DP, Aufzählen),
-Hamiltonkreise über Spaziergänge, TSP mit Polynomgewichten, Held–Karp als Gegenprobe, Zahlen ohne gegebene Teiler, Surjektionen.
+Hamiltonkreise über Kantenzüge, TSP mit Polynomgewichten, Held–Karp als Gegenprobe, Zahlen ohne gegebene Teiler, Surjektionen.
 
 Ein Brett ist eine Menge verbotener Felder (Zeile, Spalte) mit 0 <= Zeile, Spalte < n. Ein Digraph ist eine Kostenmatrix `cost[i][j]` (None = keine Kante) oder eine Wahrheitsmatrix `adj`.
 Alles mit `int`; keine Gleitkommazahlen im Zählen (außer in `surjections_sieve_float`, das genau ihr Versagen zeigt)."""
@@ -229,7 +229,7 @@ def ham_dp(n, adj):
 
 
 def ham_sieve(n, adj):
-    """Hamiltonkreise über die Siebformel über Spaziergänge: Summe über S ⊆ V∖{0} von (−1)^(n−1−|S|)·(Zahl der geschlossenen Spaziergänge der Länge n von 0 in S ∪ {0}).
+    """Hamiltonkreise über die Siebformel über Kantenzüge: Summe über S ⊆ V∖{0} von (−1)^(n−1−|S|)·(Zahl der geschlossenen Kantenzüge der Länge n von 0 in S ∪ {0}).
     Speicher: ein Vektor mit n Zahlen. Gibt (Hamiltonkreise, Zahl der Rechenschritte)."""
     if n == 1:
         return (1 if adj[0][0] else 0), 0
@@ -257,11 +257,11 @@ def ham_sieve_subsets(n: int) -> int:
 # ----------------------------------------------------------------------------- TSP
 
 def tsp_sieve(n, cost, cmax):
-    """Kosten-Polynom aller Hamiltonkreise: das Sieb über Spaziergänge mit Gewicht z^Kosten je Kante, die Polynome als eine große ganze Zahl gepackt (B Bit je Koeffizient, ein Schritt zu Kosten c ist ein
+    """Kosten-Polynom aller Hamiltonkreise: das Sieb über Kantenzüge mit Gewicht z^Kosten je Kante, die Polynome als eine große ganze Zahl gepackt (B Bit je Koeffizient, ein Schritt zu Kosten c ist ein
     Verschieben um B·c Bit). Koeffizient w = Zahl der Hamiltonkreise mit Kosten w. Gibt (Koeffizienten bis n·cmax, Zahl der Rechenschritte)."""
     if n < 2:
         raise ValueError("verlangt n >= 2")
-    bits = n * n.bit_length() + n + 2                      # Spaziergänge der Länge n: höchstens n^n je Teilmenge, höchstens 2^(n−1) Teilmengen
+    bits = n * n.bit_length() + n + 2                      # Kantenzüge der Länge n: höchstens n^n je Teilmenge, höchstens 2^(n−1) Teilmengen
     pos = neg = 0
     ops = 0
     for s in range(1 << (n - 1)):

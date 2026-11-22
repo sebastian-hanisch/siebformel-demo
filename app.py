@@ -1,7 +1,7 @@
 """Siebformel – alles zählen, das Verbotene abziehen - interaktive Konzept-Demo
 Sebastian Hanisch - Operations Research und Machine Learning
 
-Stück 7 der Reihe „Abzählen und erzeugende Funktionen“: Die Siebformel (Inklusion–Exklusion) für Zuordnungen mit verbotenen Feldern (Turmzahlen, Ménage-Zahlen, Ryser), Hamiltonkreise über Spaziergänge
+Stück 7 der Reihe „Abzählen und erzeugende Funktionen“: Die Siebformel (Inklusion–Exklusion) für Zuordnungen mit verbotenen Feldern (Turmzahlen, Ménage-Zahlen, Ryser), Hamiltonkreise über Kantenzüge
 und TSP mit Polynomgewichten; gegen Held–Karp (Stück 4) und Aufzählen geprüft; das Sieb spart Speicher, nicht Zeit, und sollte mit ganzen Zahlen gerechnet werden.
 Aufbau und Regeln: DEMO-PLAYBOOK.md (§2).
 
@@ -112,7 +112,7 @@ st.markdown(
     """
 **Der umgekehrte Weg.** Stück 3 bis 6 haben Strukturen **aufgebaut**. Bei **Verboten** ist es oft einfacher, erst **alles** zu zählen und dann das Verbotene abzuziehen: Die Zahl der Objekte ohne eine von $k$ Eigenschaften ist
 $\\sum_{S} (-1)^{|S|}\\, N(S)$ über alle Teilmengen $S$ der Eigenschaften, mit $N(S)$ = Zahl der Objekte, die mindestens die Eigenschaften in $S$ haben (**Inklusion–Exklusion**).
-Die Summanden wachsen mit $2^k$; die Struktur lässt sie zusammenfassen: bei Zuordnungen mit verbotenen Feldern nach der Zahl der Türme auf höchstens $n+1$ Summanden (die **Turmzahlen** selbst muss man ausrechnen), bei Hamiltonkreisen auf Spaziergänge in Teilmengen der Städte.
+Die Summanden wachsen mit $2^k$; die Struktur lässt sie zusammenfassen: bei Zuordnungen mit verbotenen Feldern nach der Zahl der Türme auf höchstens $n+1$ Summanden (die **Turmzahlen** selbst muss man ausrechnen), bei Hamiltonkreisen auf Kantenzüge in Teilmengen der Städte.
 Das Sieb sollte mit **ganzen Zahlen** gerechnet werden: die Summanden können riesig sein und löschen sich dann fast aus.
 
 Weiter unten: **fünf Experimente** (**🔬**), eine **🎲 Spielwiese**, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
@@ -136,7 +136,7 @@ with st.expander("So funktioniert die Siebformel", expanded=True):
     st.markdown(
         """
 1. **Zuordnung mit verbotenen Feldern:** $n$ Aufgaben auf $n$ Maschinen, einige Paare verboten. Wer eine Menge $S$ nichtangreifender verbotener Paare erzwingt, hat noch $(n-|S|)!$ Zuordnungen; die Zahl der Mengen mit $k$ Paaren ist die **Turmzahl** $r_k$. Ergebnis: $\\sum_k (-1)^k\\, r_k\\, (n-k)!$.
-2. **Hamiltonkreis:** Zähle geschlossene **Spaziergänge** der Länge $n$ von Stadt 0, die nur Städte aus einer Teilmenge $S$ benutzen (leicht: Vektor mal Matrix). Ein Spaziergang, der alle $n$ Städte besucht, ist ein Hamiltonkreis. Sieb über $S$: $\\sum_S (-1)^{n-|S|}\\, W(S)$.
+2. **Hamiltonkreis:** Zähle geschlossene **Kantenzüge** der Länge $n$ von Stadt 0, die nur Städte aus einer Teilmenge $S$ benutzen (leicht: Vektor mal Matrix). Ein Kantenzug, der alle $n$ Städte besucht, ist ein Hamiltonkreis. Sieb über $S$: $\\sum_S (-1)^{n-|S|}\\, W(S)$.
 3. **TSP:** Jede Kante bekommt das Gewicht $z^{\\text{Kosten}}$; der Koeffizient von $z^w$ zählt die Hamiltonkreise mit Kosten $w$.
 4. **Gegenproben:** Aufzählen, die Teilmengen-DP (Held–Karp aus Stück 4, Permanente) und Formeln; das Sieb muss denselben Wert liefern.
         """
@@ -237,7 +237,7 @@ verdict(verdict_menage(menage, menage_problems))
 st.markdown("---")
 
 st.subheader("🔬 Experiment 3: Sieb gegen Held–Karp")
-st.caption("Hamiltonkreise im vollständigen Digraphen: das Sieb über Spaziergänge gegen den Held–Karp-Zähler aus Stück 4, exakt gezählte Schritte und gespeicherte Zahlen. Die Zeit messen Sie auf Klick; sie ist eine Messung dieses Rechners.")
+st.caption("Hamiltonkreise im vollständigen Digraphen: das Sieb über Kantenzüge gegen den Held–Karp-Zähler aus Stück 4, exakt gezählte Schritte und gespeicherte Zahlen. Die Zeit messen Sie auf Klick; sie ist eine Messung dieses Rechners.")
 hk, hk_problems = _hk()
 st.plotly_chart(build_hk(hk), width="stretch", key="hk_chart")
 st.dataframe([{"n": r["n"], "Hamiltonkreise": big_text(r["Hamiltonkreise"]), "Teilmengen im Sieb": big_text(r["Teilmengen im Sieb"]), "Rechenschritte Sieb": big_text(r["Rechenschritte Sieb"]),
@@ -254,7 +254,7 @@ if timing:
 st.markdown("---")
 
 st.subheader("🔬 Experiment 4: TSP mit Polynomgewichten")
-st.caption(f"{C.TSP_N} Städte, alle Kanten, Kosten 1 bis {C.TSP_R} (der Seed kommt aus der Seitenleiste). Jede Kante trägt das Gewicht z^Kosten; das Sieb liefert die Zahl der Hamiltonkreise je Gesamtkosten, "
+st.caption(f"{C.TSP_N} Städte, alle Kanten, Kosten 1 bis {C.TSP_R} (der Seed kommt aus der Seitenleiste). Jede Kante erhält das Gewicht z^Kosten; das Sieb liefert die Zahl der Hamiltonkreise je Gesamtkosten, "
            "Held–Karp mit einem Paar aus Kosten und Zahl der besten (Stück 4) und Aufzählen dienen als Gegenprobe.")
 tsp = _tsp(int(seed))
 st.plotly_chart(build_cost_distribution(tsp["poly"]), width="stretch", key="tsp_chart")
@@ -304,7 +304,7 @@ st.markdown(
 | **Das Sieb ist schneller als Aufbauen** | Nicht bei Hamiltonkreisen: das Sieb braucht etwa das Dreizehnfache an Rechenschritten bei n = 10 (Experiment 3) und spart nur Speicher. | Stück 4: Held–Karp |
 | **Kosten sind kleine ganze Zahlen** | Das Kostenpolynom hat Grad n·r; die App begrenzt r auf {C.R_MAX} und n auf {C.TOUR_N_MAX}. Größere Kosten brauchen eine andere Rechnung. | – |
 | **Nur gerichtete Kreise ab Stadt 0** | Ein ungerichteter Kreis zählt in beide Richtungen doppelt; Björklunds Verfahren für ungerichtete Hamiltonkreise ist nicht Teil der Demo. | Ausblick |
-| **Die Teilmengen passen in die Rechenzeit** | Das Sieb über Spaziergänge hat 2^(n−1) Teilmengen (n ≤ {C.TOUR_N_MAX}), das Sieb über Feldmengen 2^|F| (nur bis {C.FIELD_SIEVE_MAX} Felder). | Stück 13: Entscheidungsdiagramme |
+| **Die Teilmengen passen in die Rechenzeit** | Das Sieb über Kantenzüge hat 2^(n−1) Teilmengen (n ≤ {C.TOUR_N_MAX}), das Sieb über Feldmengen 2^|F| (nur bis {C.FIELD_SIEVE_MAX} Felder). | Stück 13: Entscheidungsdiagramme |
 | **Zuordnungen nur zählen** | Die Permanente ist #P-schwer; das Ryser-Sieb hat 2ⁿ−1 Summanden, ist also bis n = {C.N_MAX} ohne Mühe, aber nicht allgemein schnell. | Komplexitätslinie |
 """
 )
@@ -322,7 +322,7 @@ with st.expander("📐 Mathematische Formulierung"):
 | $N(S)$ | Zahl der Objekte, die mindestens die Eigenschaften der Menge $S$ haben |
 | $n$ | Zahl der Aufgaben und Maschinen bzw. der Städte |
 | $r_k$ | Turmzahl: Zahl der Mengen aus $k$ verbotenen Feldern, die in verschiedenen Zeilen und Spalten liegen |
-| $W(S)$ | Zahl der geschlossenen Spaziergänge der Länge $n$ von Stadt $0$, die nur Städte aus $S$ und die Stadt $0$ benutzen |
+| $W(S)$ | Zahl der geschlossenen Kantenzüge der Länge $n$ von Stadt $0$, die nur Städte aus $S$ und die Stadt $0$ benutzen |
 | $h_w$ | Zahl der Hamiltonkreise mit Gesamtkosten $w$ |
 
 [Schritt für Schritt erklärt, mit Herleitung und Literatur](https://sebastianhanisch.net/siebformel-erklaert.html#fachleute)
@@ -340,7 +340,7 @@ Hauptdiagonale: $r_k = \binom{n}{k}$, also $D_n = \sum_k (-1)^k \binom{n}{k} (n-
 
 **Ryser.** Für eine 0/1-Matrix $A$ ist die Zahl der Zuordnungen $\operatorname{perm}(A) = \sum_{S \subseteq \{1, \dots, n\}} (-1)^{n-|S|} \prod_{i=1}^{n} \sum_{j \in S} a_{ij}$, also $2^n - 1$ Summanden statt $n!$ Permutationen.
 
-**Hamiltonkreise.** Sei $W(S)$ die Zahl der geschlossenen Spaziergänge der Länge $n$ von der Stadt $0$, die nur Städte aus $S \cup \{0\}$ benutzen. Dann ist die Zahl der Hamiltonkreise
+**Hamiltonkreise.** Sei $W(S)$ die Zahl der geschlossenen Kantenzüge der Länge $n$ von der Stadt $0$, die nur Städte aus $S \cup \{0\}$ benutzen. Dann ist die Zahl der Hamiltonkreise
 $$\sum_{S \subseteq V \setminus \{0\}} (-1)^{n-1-|S|}\, W(S).$$
 Jede $W(S)$ ist das Element $(0,0)$ von $A_S^n$ ($A_S$ die Nachbarschaftsmatrix auf $S \cup \{0\}$); gerechnet wird mit einem Vektor, also mit $n$ gespeicherten Zahlen.
 
